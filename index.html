@@ -20,120 +20,44 @@
         }
 
         body {
-            background-color: var(--main-bg); /* Keeping your requested background color */
+            /* The body background is handled by the fixed layer now */
             color: var(--text-color);
-            font-family: Cambria, Georgia, serif; /* Requested Font */
+            font-family: Cambria, Georgia, serif;
             line-height: 1.6;
-            overflow-x: hidden;
         }
 
         a { text-decoration: none; color: black; transition: 0.3s; }
         ul { list-style: none; }
 
-        /* --- Navigation --- */
-        header {
-            position: absolute;
+        /* --- 1. FIXED BACKGROUND LAYER --- */
+        /* This container stays put while everything else scrolls */
+        .fixed-background-layer {
+            position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            padding: 1.5rem 5%;
-            z-index: 100;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: transparent; /* Transparent header like the reference image */
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: black;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 30px;
-        }
-
-        .nav-links a {
-            font-weight: bold;
-            font-size: 1.1rem;
-            position: relative;
-        }
-
-        .nav-links a:hover {
-            color: var(--highlight);
-        }
-
-        .menu-toggle { display: none; font-size: 1.5rem; cursor: pointer; }
-
-        /* --- Hero Section (The Split Wave) --- */
-        .hero-section {
-            position: relative;
+            width: 100vw;
             height: 100vh;
-            min-height: 600px;
-            display: flex;
-            align-items: center;
-            background-color: var(--white); /* Left side is white */
+            z-index: -1; /* Sends it to the very back */
+            background-color: var(--white); /* Left side base */
             overflow: hidden;
         }
 
-        /* The Right Side Color Wave */
+        /* The Right Side Color Wave (Fixed) */
         .hero-wave-bg {
             position: absolute;
             top: 0;
             right: 0;
-            width: 65%; /* Covers right side */
+            width: 65%;
             height: 100%;
             background-color: var(--main-bg);
-            /* Creating the curve using clip-path */
+            /* Creating the curve */
             clip-path: ellipse(90% 100% at 80% 50%);
-            z-index: 1;
         }
 
-        .hero-content {
-            position: relative;
-            z-index: 10;
-            width: 40%; /* Left text area */
-            padding-left: 5%;
-        }
-
-        .hero-content h1 {
-            font-size: 3.5rem;
-            line-height: 1.2;
-            margin-bottom: 1.5rem;
-        }
-
-        .hero-content p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            max-width: 450px;
-        }
-
-        /* Call to Action Button */
-        .cta-button {
-            display: inline-block;
-            background-color: var(--highlight);
-            color: black;
-            padding: 12px 35px;
-            border-radius: 50px; /* Rounded pill shape like image */
-            font-weight: bold;
-            font-size: 1.2rem;
-            border: none;
-            box-shadow: 0 4px 15px rgba(46, 209, 156, 0.4);
-            cursor: pointer;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(46, 209, 156, 0.6);
-        }
-
-        /* --- Floating Geometric Figures (Instead of 'X') --- */
+        /* Floating Geometric Figures (Fixed) */
         .shape {
             position: absolute;
             opacity: 0.6;
-            z-index: 5;
             animation: float 6s ease-in-out infinite;
         }
 
@@ -154,7 +78,7 @@
             transform: rotate(45deg);
         }
 
-        /* Positioning shapes */
+        /* Positioning shapes in the fixed layer */
         .s1 { top: 20%; left: 10%; animation-delay: 0s; }
         .s2 { top: 60%; left: 45%; border-bottom-color: black; animation-delay: 1s; }
         .s3 { top: 15%; right: 20%; background-color: white; animation-delay: 2s; }
@@ -166,19 +90,113 @@
             100% { transform: translateY(0px) rotate(0deg); }
         }
 
-        /* --- Right Side "Mockup" Graphic --- */
-        /* This simulates the floating UI/Image on the right side of your reference */
+        /* --- 2. FIXED HEADER --- */
+        header {
+            position: fixed; /* Fixes header to top */
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1rem 5%;
+            z-index: 1000; /* Ensures it stays on top of everything */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            
+            /* Glassmorphism effect so you can read it over scrolling content */
+            background: rgba(255, 255, 255, 0.85); 
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: black;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .nav-links a:hover {
+            color: var(--highlight);
+        }
+
+        .menu-toggle { display: none; font-size: 1.5rem; cursor: pointer; }
+
+        /* --- 3. SCROLLABLE CONTENT --- */
+        main {
+            position: relative;
+            z-index: 10;
+            /* Padding top creates space so the fixed header doesn't cover content */
+            padding-top: 100px; 
+        }
+
+        /* Hero Content (Scrolls over the fixed background) */
+        .hero-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 80vh; /* Takes up most of the screen initially */
+            padding: 0 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .hero-text {
+            width: 45%;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Call to Action Button */
+        .cta-button {
+            display: inline-block;
+            background-color: var(--highlight);
+            color: black;
+            padding: 12px 35px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            border: none;
+            box-shadow: 0 4px 15px rgba(46, 209, 156, 0.4);
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(46, 209, 156, 0.6);
+        }
+
+        /* Floating Card Graphic */
+        .hero-graphic {
+            width: 40%;
+            display: flex;
+            justify-content: flex-end;
+        }
+
         .floating-card {
-            position: absolute;
-            right: 10%;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             padding: 2rem;
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            z-index: 5;
-            width: 300px;
+            width: 100%;
+            max-width: 350px;
             border-left: 5px solid var(--highlight);
         }
         
@@ -188,6 +206,7 @@
         /* --- Content Sections --- */
         section {
             padding: 5rem 5%;
+            /* Make sections distinct as they scroll over the fixed BG */
         }
 
         .container {
@@ -211,7 +230,7 @@
             margin-top: 5px;
         }
 
-        /* White Cards Layout for readability on Colored BG */
+        /* Grid Layout for Cards */
         .grid-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -270,7 +289,8 @@
             background-color: var(--highlight);
             text-align: center;
             padding: 2rem;
-            margin-top: 0;
+            position: relative;
+            z-index: 10;
         }
 
         /* Mobile Styles */
@@ -282,23 +302,19 @@
                 bottom: 0;
                 clip-path: ellipse(150% 100% at 50% 100%);
             }
-            .hero-section {
+            .hero-container {
                 flex-direction: column;
                 justify-content: center;
                 text-align: center;
+                padding-top: 2rem;
             }
-            .hero-content {
+            .hero-text {
                 width: 100%;
-                padding: 0 1rem;
-                margin-top: -100px; /* Pull text up */
+                margin-bottom: 3rem;
             }
-            .floating-card {
-                position: relative;
-                right: auto;
-                top: auto;
-                transform: none;
-                margin: 20px auto;
-                width: 90%;
+            .hero-graphic {
+                width: 100%;
+                justify-content: center;
             }
             .nav-links { display: none; }
             .menu-toggle { display: block; }
@@ -307,6 +323,15 @@
     </style>
 </head>
 <body>
+
+    <div class="fixed-background-layer">
+        <div class="hero-wave-bg"></div>
+        
+        <div class="shape shape-triangle s1"></div>
+        <div class="shape shape-triangle s2"></div>
+        <div class="shape shape-square s3"></div>
+        <div class="shape shape-square s4"></div>
+    </div>
 
     <header>
         <div class="logo">Peak Tutors</div>
@@ -317,146 +342,152 @@
             <li><a href="#reviews">Reviews</a></li>
             <li><a href="#calendar">Calendar</a></li>
             <li><a href="#contact">Contact</a></li>
-            <li><a href="#interest" class="cta-button" style="padding: 8px 20px; font-size: 1rem;">Get Started</a></li>
+            <li><a href="#interest" class="cta-button" style="padding: 8px 20px; font-size: 1rem; box-shadow: none;">Get Started</a></li>
         </ul>
     </header>
 
-    <section class="hero-section">
+    <main>
         
-        <div class="shape shape-triangle s1"></div>
-        <div class="shape shape-triangle s2"></div>
-        <div class="shape shape-square s3"></div>
-        <div class="shape shape-square s4"></div>
+        <div class="hero-container">
+            <div class="hero-text">
+                <h1>Creating Confidence & Success</h1>
+                <p>Personalized tutoring for high school students. We simplify the complex and help you reach your academic potential.</p>
+                <a href="#interest" class="cta-button">Get Started &gt;</a>
+            </div>
 
-        <div class="hero-content">
-            <h1>Creating Confidence & Success</h1>
-            <p>Personalized tutoring for high school students. We simplify the complex and help you reach your academic potential.</p>
-            <a href="#interest" class="cta-button">Get Started &gt;</a>
-        </div>
-
-        <div class="hero-wave-bg">
-            <div class="floating-card">
-                <h3>Student Results</h3>
-                <div class="stat-row">
-                    <span>Avg. Grade Increase</span>
-                    <strong>+15%</strong>
-                </div>
-                <div class="stat-row">
-                    <span>Top Colleges</span>
-                    <strong>Accepted</strong>
-                </div>
-                <div class="stat-row">
-                    <span>SAT Points</span>
-                    <strong>+150</strong>
-                </div>
-                <div style="margin-top: 15px; height: 50px; background: #e0f7f4; display: flex; align-items: flex-end; justify-content: space-around; padding-bottom: 5px; border-radius: 5px;">
-                    <div style="width: 15%; height: 40%; background: var(--highlight);"></div>
-                    <div style="width: 15%; height: 60%; background: var(--highlight);"></div>
-                    <div style="width: 15%; height: 80%; background: var(--highlight);"></div>
-                    <div style="width: 15%; height: 50%; background: var(--highlight);"></div>
+            <div class="hero-graphic">
+                <div class="floating-card">
+                    <h3>Student Results</h3>
+                    <div class="stat-row">
+                        <span>Avg. Grade Increase</span>
+                        <strong>+15%</strong>
+                    </div>
+                    <div class="stat-row">
+                        <span>Top Colleges</span>
+                        <strong>Accepted</strong>
+                    </div>
+                    <div class="stat-row">
+                        <span>SAT Points</span>
+                        <strong>+150</strong>
+                    </div>
+                    <div style="margin-top: 15px; height: 50px; background: #e0f7f4; display: flex; align-items: flex-end; justify-content: space-around; padding-bottom: 5px; border-radius: 5px;">
+                        <div style="width: 15%; height: 40%; background: var(--highlight);"></div>
+                        <div style="width: 15%; height: 60%; background: var(--highlight);"></div>
+                        <div style="width: 15%; height: 80%; background: var(--highlight);"></div>
+                        <div style="width: 15%; height: 50%; background: var(--highlight);"></div>
+                    </div>
                 </div>
             </div>
         </div>
-    </section>
 
-    <section id="about">
-        <div class="container">
-            <h2>About Me</h2>
-            <div class="card">
-                <p><strong>Hi! I am Raj.</strong> I graduated from UC Santa Cruz with a degree in Computer Science, and I have over 8 years of tutoring experience. My passion for teaching stems from my own 10th-grade physics teacher who showed me that learning doesn't have to be scary—it can be empowering.</p>
-                <br>
-                <p>I have taught over 100 students, helping them not just pass tests, but understand the material fundamentally.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="classes">
-        <div class="container">
-            <h2>Classes Available</h2>
-            <div class="grid-container">
+        <section id="about">
+            <div class="container">
+                <h2>About Me</h2>
                 <div class="card">
-                    <h3>Mathematics</h3>
-                    <p>Algebra I & II, Geometry, Pre-Calculus, AP Calculus AB/BC.</p>
-                </div>
-                <div class="card">
-                    <h3>Science</h3>
-                    <p>Physics, Chemistry, Biology, AP Computer Science.</p>
-                </div>
-                <div class="card">
-                    <h3>Test Prep</h3>
-                    <p>SAT & ACT strategy sessions focusing on time management.</p>
+                    <p><strong>Hi! I am Raj.</strong> I graduated from UC Santa Cruz with a degree in Computer Science, and I have over 8 years of tutoring experience. My passion for teaching stems from my own 10th-grade physics teacher who showed me that learning doesn't have to be scary—it can be empowering.</p>
+                    <br>
+                    <p>I have taught over 100 students, helping them not just pass tests, but understand the material fundamentally.</p>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="reviews">
-        <div class="container">
-            <h2>What Students Say</h2>
-            <div class="grid-container">
-                <div class="card">
-                    <p style="font-style: italic;">"I was struggling with Physics, but Raj made it click. I got an A on my final!"</p>
-                    <p style="font-weight: bold; margin-top: 10px;">- Alex D.</p>
-                </div>
-                <div class="card">
-                    <p style="font-style: italic;">"The best coding tutor. Helped me ace AP CSA."</p>
-                    <p style="font-weight: bold; margin-top: 10px;">- Priya S.</p>
-                </div>
-                <div class="card">
-                    <p style="font-style: italic;">"Explained calculus better than my actual teacher."</p>
-                    <p style="font-weight: bold; margin-top: 10px;">- Jordan M.</p>
+        <section id="classes">
+            <div class="container">
+                <h2>Classes Available</h2>
+                <div class="grid-container">
+                    <div class="card">
+                        <h3>Mathematics</h3>
+                        <p>Algebra I & II, Geometry, Pre-Calculus, AP Calculus AB/BC.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Science</h3>
+                        <p>Physics, Chemistry, Biology, AP Computer Science.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Test Prep</h3>
+                        <p>SAT & ACT strategy sessions focusing on time management.</p>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="calendar" style="background-color: var(--white);">
-        <div class="container" style="text-align: center;">
-            <h2 style="border-color: var(--main-bg);">Availability</h2>
-            <div style="border: 2px dashed var(--highlight); padding: 40px; background: #fafafa; border-radius: 10px;">
-                <p>[ Embed Google Calendar or Calendly Link Here ]</p>
+        <section id="reviews">
+            <div class="container">
+                <h2>What Students Say</h2>
+                <div class="grid-container">
+                    <div class="card">
+                        <p style="font-style: italic;">"I was struggling with Physics, but Raj made it click. I got an A on my final!"</p>
+                        <p style="font-weight: bold; margin-top: 10px;">- Alex D.</p>
+                    </div>
+                    <div class="card">
+                        <p style="font-style: italic;">"The best coding tutor. Helped me ace AP CSA."</p>
+                        <p style="font-weight: bold; margin-top: 10px;">- Priya S.</p>
+                    </div>
+                    <div class="card">
+                        <p style="font-style: italic;">"Explained calculus better than my actual teacher."</p>
+                        <p style="font-weight: bold; margin-top: 10px;">- Jordan M.</p>
+                    </div>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="interest">
-        <div class="container">
-            <h2 style="color: black;">Interest Form</h2>
-            <form action="https://formspree.io/f/your-form-id" method="POST">
-                <div class="form-group">
-                    <label>Student Name</label>
-                    <input type="text" name="name" required>
+        <section id="calendar">
+            <div class="container" style="text-align: center;">
+                <h2 style="border-color: var(--main-bg);">Availability</h2>
+                <div style="border: 2px dashed var(--highlight); padding: 40px; background: rgba(255,255,255,0.9); border-radius: 10px;">
+                    <p>[ Embed Google Calendar or Calendly Link Here ]</p>
                 </div>
-                <div class="form-group">
-                    <label>Email</label>
-                    <input type="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label>Subject</label>
-                    <select name="subject">
-                        <option>Math</option>
-                        <option>Science</option>
-                        <option>Computer Science</option>
-                        <option>SAT/ACT</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Message</label>
-                    <textarea name="message" rows="4"></textarea>
-                </div>
-                <button type="submit">Send Message</button>
-            </form>
-        </div>
-    </section>
+            </div>
+        </section>
 
-    <footer>
-        <p>&copy; 2025 Peak Tutors. San Jose, CA.</p>
-        <p style="font-size: 0.9rem; margin-top: 5px;">Contact: (555) 123-4567 | raj@peaktutors.com</p>
-    </footer>
+        <section id="interest">
+            <div class="container">
+                <h2 style="color: black;">Interest Form</h2>
+                <form action="https://formspree.io/f/your-form-id" method="POST">
+                    <div class="form-group">
+                        <label>Student Name</label>
+                        <input type="text" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Subject</label>
+                        <input type="text" name="subject" placeholder="e.g. AP Physics" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Message</label>
+                        <textarea name="message" rows="4"></textarea>
+                    </div>
+                    <button type="submit">Send Message</button>
+                </form>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2025 Peak Tutors. San Jose, CA.</p>
+            <p style="font-size: 0.9rem; margin-top: 5px;">Contact: (555) 123-4567 | raj@peaktutors.com</p>
+        </footer>
+
+    </main>
 
     <script>
         function toggleMenu() {
-            alert("Menu toggle functionality would go here! (Usually toggles a class on the nav-links)");
+            const nav = document.querySelector('.nav-links');
+            if(nav.style.display === 'flex') {
+                nav.style.display = 'none';
+            } else {
+                nav.style.display = 'flex';
+                nav.style.flexDirection = 'column';
+                nav.style.position = 'absolute';
+                nav.style.top = '60px';
+                nav.style.right = '0';
+                nav.style.background = 'white';
+                nav.style.width = '100%';
+                nav.style.padding = '20px';
+                nav.style.boxShadow = '0 5px 10px rgba(0,0,0,0.1)';
+            }
         }
     </script>
 </body>
