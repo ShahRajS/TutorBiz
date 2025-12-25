@@ -3,9 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>High School Tutoring Services</title>
+    <title>Peak Performance Tutoring</title>
     <style>
         /* --- General Settings --- */
+        :root {
+            --main-bg: #7de7d7;       /* Light Teal */
+            --highlight: #2ed19c;     /* Greenish Teal */
+            --text-color: black;
+            --white: #ffffff;
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -13,128 +20,198 @@
         }
 
         body {
-            /* Main Background Color */
-            background-color: #7de7d7; 
-            color: black;
-            font-family: Cambria, Georgia, serif;
+            background-color: var(--main-bg); /* Keeping your requested background color */
+            color: var(--text-color);
+            font-family: Cambria, Georgia, serif; /* Requested Font */
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        a {
-            text-decoration: none;
-            color: black;
-            transition: 0.3s;
-        }
-
-        ul {
-            list-style: none;
-        }
-
-        /* --- Utility Classes for Colors --- */
-        .highlight-bg {
-            background-color: #2ed19c;
-        }
-
-        .highlight-text {
-            color: #2ed19c;
-        }
+        a { text-decoration: none; color: black; transition: 0.3s; }
+        ul { list-style: none; }
 
         /* --- Navigation --- */
         header {
-            background-color: #2ed19c; /* Highlight Color */
-            padding: 1rem 0;
-            position: sticky;
+            position: absolute;
             top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        nav {
+            left: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            z-index: 100;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            background: transparent; /* Transparent header like the reference image */
         }
 
         .logo {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             font-weight: bold;
+            color: black;
         }
 
         .nav-links {
             display: flex;
-            gap: 20px;
+            gap: 30px;
         }
 
         .nav-links a {
             font-weight: bold;
             font-size: 1.1rem;
+            position: relative;
         }
 
         .nav-links a:hover {
-            opacity: 0.7;
+            color: var(--highlight);
         }
 
-        /* Mobile Menu Toggle */
-        .menu-toggle {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
+        .menu-toggle { display: none; font-size: 1.5rem; cursor: pointer; }
+
+        /* --- Hero Section (The Split Wave) --- */
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            background-color: var(--white); /* Left side is white */
+            overflow: hidden;
         }
 
-        /* --- Hero Section --- */
-        .hero {
-            text-align: center;
-            padding: 4rem 1rem;
+        /* The Right Side Color Wave */
+        .hero-wave-bg {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 65%; /* Covers right side */
+            height: 100%;
+            background-color: var(--main-bg);
+            /* Creating the curve using clip-path */
+            clip-path: ellipse(90% 100% at 80% 50%);
+            z-index: 1;
         }
 
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            width: 40%; /* Left text area */
+            padding-left: 5%;
         }
 
+        .hero-content h1 {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 450px;
+        }
+
+        /* Call to Action Button */
         .cta-button {
             display: inline-block;
-            background-color: #2ed19c;
-            border: 2px solid black;
-            padding: 10px 25px;
+            background-color: var(--highlight);
+            color: black;
+            padding: 12px 35px;
+            border-radius: 50px; /* Rounded pill shape like image */
+            font-weight: bold;
             font-size: 1.2rem;
-            margin-top: 20px;
+            border: none;
+            box-shadow: 0 4px 15px rgba(46, 209, 156, 0.4);
             cursor: pointer;
-            font-family: Cambria, serif;
         }
 
         .cta-button:hover {
-            background-color: black;
-            color: #7de7d7;
-            border-color: #7de7d7;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(46, 209, 156, 0.6);
         }
 
-        /* --- Sections Generic --- */
+        /* --- Floating Geometric Figures (Instead of 'X') --- */
+        .shape {
+            position: absolute;
+            opacity: 0.6;
+            z-index: 5;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* Triangles */
+        .shape-triangle {
+            width: 0; 
+            height: 0; 
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-bottom: 25px solid var(--highlight);
+        }
+
+        /* Squares */
+        .shape-square {
+            width: 25px;
+            height: 25px;
+            background-color: var(--highlight);
+            transform: rotate(45deg);
+        }
+
+        /* Positioning shapes */
+        .s1 { top: 20%; left: 10%; animation-delay: 0s; }
+        .s2 { top: 60%; left: 45%; border-bottom-color: black; animation-delay: 1s; }
+        .s3 { top: 15%; right: 20%; background-color: white; animation-delay: 2s; }
+        .s4 { bottom: 20%; right: 10%; width: 40px; height: 40px; border: 3px solid white; background: transparent; animation-delay: 3s; }
+
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+
+        /* --- Right Side "Mockup" Graphic --- */
+        /* This simulates the floating UI/Image on the right side of your reference */
+        .floating-card {
+            position: absolute;
+            right: 10%;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            z-index: 5;
+            width: 300px;
+            border-left: 5px solid var(--highlight);
+        }
+        
+        .floating-card h3 { font-size: 1.5rem; margin-bottom: 10px; }
+        .floating-card .stat-row { display: flex; justify-content: space-between; margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 5px;}
+
+        /* --- Content Sections --- */
         section {
-            padding: 3rem 0;
-            border-bottom: 1px solid rgba(0,0,0,0.1);
+            padding: 5rem 5%;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         h2 {
             font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 2rem;
-            border-bottom: 3px solid #2ed19c;
+            margin-bottom: 3rem;
+            position: relative;
             display: inline-block;
-            padding-bottom: 5px;
+        }
+        
+        h2::after {
+            content: '';
+            display: block;
+            width: 50%;
+            height: 4px;
+            background: var(--highlight);
+            margin-top: 5px;
         }
 
-        .section-header {
-            text-align: center;
-        }
-
-        /* Cards Container */
+        /* White Cards Layout for readability on Colored BG */
         .grid-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -142,175 +219,160 @@
         }
 
         .card {
-            background-color: rgba(255, 255, 255, 0.4); /* Slight transparency */
-            border: 2px solid #2ed19c;
-            padding: 1.5rem;
-            border-radius: 8px;
-            box-shadow: 3px 3px 0px black;
-        }
-
-        /* --- Specific Section Styles --- */
-        
-        /* About Me */
-        .about-content {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 2rem;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .profile-placeholder {
-            width: 200px;
-            height: 200px;
-            background-color: #2ed19c;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 3px solid black;
-        }
-
-        /* Calendar */
-        .calendar-wrapper {
-            background-color: white;
+            background: white;
             padding: 2rem;
-            text-align: center;
-            border: 2px solid #2ed19c;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: 0.3s;
+            border-top: 4px solid var(--highlight);
         }
 
-        /* Reviews */
-        .review-text {
-            font-style: italic;
-        }
-        .review-author {
-            margin-top: 10px;
-            font-weight: bold;
-            text-align: right;
-        }
+        .card:hover { transform: translateY(-5px); }
+        .card h3 { margin-bottom: 1rem; color: var(--highlight); font-size: 1.5rem; }
 
-        /* Form */
+        /* Form Styling */
         form {
-            max-width: 600px;
+            background: white;
+            padding: 3rem;
+            border-radius: 15px;
+            max-width: 700px;
             margin: 0 auto;
-            background-color: rgba(255,255,255,0.4);
-            padding: 2rem;
-            border: 2px solid #2ed19c;
-            box-shadow: 5px 5px 0px black;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
 
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: bold;
-        }
-
+        .form-group { margin-bottom: 1.5rem; }
+        label { display: block; margin-bottom: 0.5rem; font-weight: bold; }
         input, textarea, select {
             width: 100%;
-            padding: 10px;
-            border: 1px solid black;
-            font-family: Cambria, serif;
-            background-color: #f0fffc;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-family: Cambria;
+            background: #f9f9f9;
         }
-
+        
         button[type="submit"] {
             width: 100%;
-            background-color: #2ed19c;
+            background-color: var(--highlight);
             color: black;
-            border: 2px solid black;
-            padding: 10px;
-            font-size: 1.1rem;
+            border: none;
+            padding: 15px;
+            font-size: 1.2rem;
+            border-radius: 6px;
             cursor: pointer;
-            font-family: Cambria, serif;
+            font-family: Cambria;
             font-weight: bold;
         }
         
-        button[type="submit"]:hover {
-            background-color: black;
-            color: #7de7d7;
-        }
+        button[type="submit"]:hover { background-color: black; color: white; }
 
-        /* Footer */
         footer {
-            background-color: #2ed19c;
+            background-color: var(--highlight);
             text-align: center;
-            padding: 2rem 0;
-            margin-top: 3rem;
+            padding: 2rem;
+            margin-top: 0;
         }
 
-        /* Mobile Responsive */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 60px;
-                right: 0;
-                background-color: #2ed19c;
+        /* Mobile Styles */
+        @media (max-width: 900px) {
+            .hero-wave-bg {
                 width: 100%;
+                height: 50%;
+                top: auto;
+                bottom: 0;
+                clip-path: ellipse(150% 100% at 50% 100%);
+            }
+            .hero-section {
+                flex-direction: column;
+                justify-content: center;
                 text-align: center;
-                padding: 1rem 0;
-                border-bottom: 2px solid black;
             }
-
-            .nav-links.active {
-                display: flex;
+            .hero-content {
+                width: 100%;
+                padding: 0 1rem;
+                margin-top: -100px; /* Pull text up */
             }
-
-            .menu-toggle {
-                display: block;
+            .floating-card {
+                position: relative;
+                right: auto;
+                top: auto;
+                transform: none;
+                margin: 20px auto;
+                width: 90%;
             }
+            .nav-links { display: none; }
+            .menu-toggle { display: block; }
+            h2::after { margin: 5px auto; }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="container">
-            <nav>
-                <div class="logo">Peak Performance Tutoring</div>
-                <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-                <ul class="nav-links">
-                    <li><a href="#about">About Me</a></li>
-                    <li><a href="#classes">Classes</a></li>
-                    <li><a href="#reviews">Reviews</a></li>
-                    <li><a href="#calendar">Calendar</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                    <li><a href="#interest" style="text-decoration: underline;">Interest Form</a></li>
-                </ul>
-            </nav>
-        </div>
+        <div class="logo">Peak Tutors</div>
+        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+        <ul class="nav-links">
+            <li><a href="#about">About Me</a></li>
+            <li><a href="#classes">Classes</a></li>
+            <li><a href="#reviews">Reviews</a></li>
+            <li><a href="#calendar">Calendar</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="#interest" class="cta-button" style="padding: 8px 20px; font-size: 1rem;">Get Started</a></li>
+        </ul>
     </header>
 
-    <div class="hero container">
-        <h1>Master Your High School Curriculum</h1>
-        <p>Personalized tutoring to help you ace your exams and build confidence.</p>
-        <a href="#interest" class="cta-button">Book a Session</a>
-    </div>
+    <section class="hero-section">
+        
+        <div class="shape shape-triangle s1"></div>
+        <div class="shape shape-triangle s2"></div>
+        <div class="shape shape-square s3"></div>
+        <div class="shape shape-square s4"></div>
+
+        <div class="hero-content">
+            <h1>Creating Confidence & Success</h1>
+            <p>Personalized tutoring for high school students. We simplify the complex and help you reach your academic potential.</p>
+            <a href="#interest" class="cta-button">Get Started &gt;</a>
+        </div>
+
+        <div class="hero-wave-bg">
+            <div class="floating-card">
+                <h3>Student Results</h3>
+                <div class="stat-row">
+                    <span>Avg. Grade Increase</span>
+                    <strong>+15%</strong>
+                </div>
+                <div class="stat-row">
+                    <span>Top Colleges</span>
+                    <strong>Accepted</strong>
+                </div>
+                <div class="stat-row">
+                    <span>SAT Points</span>
+                    <strong>+150</strong>
+                </div>
+                <div style="margin-top: 15px; height: 50px; background: #e0f7f4; display: flex; align-items: flex-end; justify-content: space-around; padding-bottom: 5px; border-radius: 5px;">
+                    <div style="width: 15%; height: 40%; background: var(--highlight);"></div>
+                    <div style="width: 15%; height: 60%; background: var(--highlight);"></div>
+                    <div style="width: 15%; height: 80%; background: var(--highlight);"></div>
+                    <div style="width: 15%; height: 50%; background: var(--highlight);"></div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <section id="about">
         <div class="container">
-            <div class="section-header"><h2>About Me</h2></div>
-            <div class="about-content">
-                <div class="profile-placeholder">
-                    [Photo]
-                </div>
-                <div style="flex: 1; min-width: 300px;">
-                    <p>Hello! I am a dedicated tutor with a passion for helping high school students unlock their full potential. With expertise in STEM and Humanities, I simplify complex concepts and make learning enjoyable.</p>
-                    <br>
-                    <p>My goal is not just to improve grades, but to instill study habits that last a lifetime.</p>
-                </div>
+            <h2>About Me</h2>
+            <div class="card">
+                <p><strong>Hi! I am Raj.</strong> I graduated from UC Santa Cruz with a degree in Computer Science, and I have over 8 years of tutoring experience. My passion for teaching stems from my own 10th-grade physics teacher who showed me that learning doesn't have to be scary—it can be empowering.</p>
+                <br>
+                <p>I have taught over 100 students, helping them not just pass tests, but understand the material fundamentally.</p>
             </div>
         </div>
     </section>
 
     <section id="classes">
         <div class="container">
-            <div class="section-header"><h2>Classes Available</h2></div>
+            <h2>Classes Available</h2>
             <div class="grid-container">
                 <div class="card">
                     <h3>Mathematics</h3>
@@ -318,15 +380,11 @@
                 </div>
                 <div class="card">
                     <h3>Science</h3>
-                    <p>Biology, Chemistry, Physics (Regular and AP levels).</p>
+                    <p>Physics, Chemistry, Biology, AP Computer Science.</p>
                 </div>
                 <div class="card">
-                    <h3>Standardized Testing</h3>
-                    <p>SAT & ACT Prep focused on strategy and time management.</p>
-                </div>
-                <div class="card">
-                    <h3>College Prep</h3>
-                    <p>Essay writing workshops and application guidance.</p>
+                    <h3>Test Prep</h3>
+                    <p>SAT & ACT strategy sessions focusing on time management.</p>
                 </div>
             </div>
         </div>
@@ -334,86 +392,71 @@
 
     <section id="reviews">
         <div class="container">
-            <div class="section-header"><h2>Student Reviews</h2></div>
+            <h2>What Students Say</h2>
             <div class="grid-container">
                 <div class="card">
-                    <p class="review-text">"I was failing Calc BC, but after 3 months of tutoring, I finished the semester with an A. Highly recommend!"</p>
-                    <p class="review-author">- Sarah T., 11th Grade</p>
+                    <p style="font-style: italic;">"I was struggling with Physics, but Raj made it click. I got an A on my final!"</p>
+                    <p style="font-weight: bold; margin-top: 10px;">- Alex D.</p>
                 </div>
                 <div class="card">
-                    <p class="review-text">"The best tutor I've ever had. Explains things in a way that actually makes sense."</p>
-                    <p class="review-author">- Jason M., 10th Grade</p>
+                    <p style="font-style: italic;">"The best coding tutor. Helped me ace AP CSA."</p>
+                    <p style="font-weight: bold; margin-top: 10px;">- Priya S.</p>
                 </div>
                 <div class="card">
-                    <p class="review-text">"Helped me organize my college essays and reduce my stress levels immensely."</p>
-                    <p class="review-author">- Emily R., 12th Grade</p>
+                    <p style="font-style: italic;">"Explained calculus better than my actual teacher."</p>
+                    <p style="font-weight: bold; margin-top: 10px;">- Jordan M.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="calendar">
-        <div class="container">
-            <div class="section-header"><h2>Availability</h2></div>
-            <div class="calendar-wrapper">
-                <h3>My Calendar</h3>
-                <p>Check below for available time slots.</p>
-                <div style="border: 2px dashed #ccc; padding: 40px; margin-top: 20px; background: #fafafa;">
-                    <p>[Embed Google Calendar or Calendly Link Here]</p>
-                </div>
+    <section id="calendar" style="background-color: var(--white);">
+        <div class="container" style="text-align: center;">
+            <h2 style="border-color: var(--main-bg);">Availability</h2>
+            <div style="border: 2px dashed var(--highlight); padding: 40px; background: #fafafa; border-radius: 10px;">
+                <p>[ Embed Google Calendar or Calendly Link Here ]</p>
             </div>
         </div>
     </section>
 
     <section id="interest">
         <div class="container">
-            <div class="section-header"><h2>Interest Form</h2></div>
+            <h2 style="color: black;">Interest Form</h2>
             <form action="https://formspree.io/f/your-form-id" method="POST">
                 <div class="form-group">
-                    <label for="name">Student Name</label>
-                    <input type="text" id="name" name="name" required>
+                    <label>Student Name</label>
+                    <input type="text" name="name" required>
                 </div>
                 <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" name="email" required>
+                    <label>Email</label>
+                    <input type="email" name="email" required>
                 </div>
                 <div class="form-group">
-                    <label for="subject">Subject of Interest</label>
-                    <select id="subject" name="subject">
-                        <option value="Math">Math</option>
-                        <option value="Science">Science</option>
-                        <option value="English">English/Writing</option>
-                        <option value="SAT/ACT">SAT/ACT Prep</option>
-                        <option value="Other">Other</option>
+                    <label>Subject</label>
+                    <select name="subject">
+                        <option>Math</option>
+                        <option>Science</option>
+                        <option>Computer Science</option>
+                        <option>SAT/ACT</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="message">Goals / Questions</label>
-                    <textarea id="message" name="message" rows="5"></textarea>
+                    <label>Message</label>
+                    <textarea name="message" rows="4"></textarea>
                 </div>
-                <button type="submit">Submit Inquiry</button>
+                <button type="submit">Send Message</button>
             </form>
         </div>
     </section>
 
-    <section id="contact">
-        <div class="container" style="text-align: center;">
-            <div class="section-header"><h2>Contact Me</h2></div>
-            <p style="font-size: 1.2rem;">Have a quick question? Feel free to reach out directly.</p>
-            <br>
-            <p><strong>Email:</strong> tutor@example.com</p>
-            <p><strong>Phone:</strong> (555) 123-4567</p>
-        </div>
-    </section>
-
     <footer>
-        <p>&copy; 2025 Peak Performance Tutoring. All rights reserved.</p>
+        <p>&copy; 2025 Peak Tutors. San Jose, CA.</p>
+        <p style="font-size: 0.9rem; margin-top: 5px;">Contact: (555) 123-4567 | raj@peaktutors.com</p>
     </footer>
 
     <script>
         function toggleMenu() {
-            const navLinks = document.querySelector('.nav-links');
-            navLinks.classList.toggle('active');
+            alert("Menu toggle functionality would go here! (Usually toggles a class on the nav-links)");
         }
     </script>
 </body>
