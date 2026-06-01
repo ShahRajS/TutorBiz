@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Bay Area local tutoring by Raj Shah. Personalized online and in-person tutoring in Mathematics, Physics, Economics, and more for grades 3rd-12th and university.">
-    <title>TutorBiz | Raj Shah Tutoring</title>
+    <title>Raj Shah Tutoring</title>
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -538,17 +538,25 @@
             height: 320px;
             border-radius: 30px;
             background: linear-gradient(135deg, var(--accent-glow) 0%, rgba(56, 189, 248, 0.1) 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
             position: relative;
-            border: 2px dashed var(--accent);
+            border: 2px solid var(--card-border);
+            padding: 8px;
+            box-shadow: 0 15px 30px var(--shadow-color);
         }
 
-        .about-icon {
-            width: 120px;
-            height: 120px;
-            color: var(--accent);
+        .about-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 22px;
+            display: block;
+            transition: var(--transition-smooth);
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.25rem;
+            }
         }
 
         .floating-badge {
@@ -952,7 +960,7 @@
     <!-- Navigation Header -->
     <header>
         <div class="nav-container">
-            <a href="#" class="logo">TutorBiz<span>.</span></a>
+            <a href="#" class="logo">Raj Shah Tutoring<span>.</span></a>
             
             <ul class="nav-menu" id="nav-menu">
                 <li><a href="#about" class="nav-link">About</a></li>
@@ -1042,10 +1050,7 @@
                 <div class="about-image-wrapper">
                     <!-- High-fidelity Custom Graphic Frame -->
                     <div class="about-graphic-container">
-                        <!-- User SVG Icon as Headshot replacement -->
-                        <svg class="about-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.62 48.62 0 0112 20.9c2.785 0 5.5-.37 8.085-1.066.046-.221.082-.444.111-.668a59.38 59.38 0 00-.49-6.347m-15.44 0a48.39 48.39 0 002.247-2.733m-2.246 2.733V8.9c0-1.816 1.01-3.493 2.684-4.28a48.7 48.7 0 0110.632 0c1.673.787 2.683 2.464 2.683 4.281v1.247m-16 0a48.536 48.536 0 003.5-3.08m12.5 3.08a48.4 48.4 0 00-3.5-3.08m-11.25 10.15c3.558-.085 7.008-.555 10.25-1.378m0 0a48.094 48.094 0 003.497-1.907m0 0A59.39 59.39 0 0021 12m-2.25-3.08L12 13.75 5.25 8.92M12 13.75v6.5" />
-                        </svg>
+                        <img src="profile.jpg" alt="Raj Shah" class="about-image">
                         
                         <div class="floating-badge fb-1">
                             <span>🎓</span> UC Santa Cruz CS Grad
@@ -1281,7 +1286,7 @@
     <!-- Footer -->
     <footer>
         <div class="footer-content">
-            <a href="#" class="logo">TutorBiz<span>.</span></a>
+            <a href="#" class="logo">Raj Shah Tutoring<span>.</span></a>
             <p class="footer-text">&copy; 2026 Raj Shah Tutoring. Bay Area, California.</p>
             <p class="footer-text" style="font-size: 0.85rem;">Contact: (650) 906-8690 | rajshahtutoring@gmail.com</p>
         </div>
