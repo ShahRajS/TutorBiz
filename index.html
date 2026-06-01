@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Bay Area local tutoring by Raj Shah. Personalized online and in-person tutoring in Mathematics, Physics, Economics, and more for grades 3rd-12th and university.">
+    <meta name="description"
+        content="Bay Area local tutoring by Raj Shah. Personalized online and in-person tutoring in Mathematics, Physics, Economics, and more for grades 3rd-12th and university.">
     <title>Raj Shah Tutoring</title>
-    
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap"
+        rel="stylesheet">
 
     <style>
         /* --- Core Design System --- */
@@ -18,9 +22,10 @@
             --font-body: 'Inter', system-ui, -apple-system, sans-serif;
             --font-heading: 'Outfit', system-ui, -apple-system, sans-serif;
             --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            
+
             /* Light Theme Tokens */
-            --accent: #059669; /* Emerald Green */
+            --accent: #059669;
+            /* Emerald Green */
             --accent-glow: rgba(5, 150, 105, 0.15);
             --accent-hover: #047857;
             --bg-gradient-1: #f8fafc;
@@ -41,7 +46,8 @@
 
         [data-theme="dark"] {
             /* Dark Theme Tokens */
-            --accent: #34d399; /* Mintier Green for dark background */
+            --accent: #34d399;
+            /* Mintier Green for dark background */
             --accent-glow: rgba(52, 211, 153, 0.15);
             --accent-hover: #6ee7b7;
             --bg-gradient-1: #0b0f19;
@@ -86,7 +92,10 @@
             transition: var(--transition-smooth);
         }
 
-        h1, h2, h3, h4 {
+        h1,
+        h2,
+        h3,
+        h4 {
             font-family: var(--font-heading);
             color: var(--text-primary);
             font-weight: 700;
@@ -140,18 +149,33 @@
         }
 
         @keyframes float-blob-1 {
-            0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(8vw, 10vh) scale(1.15); }
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            100% {
+                transform: translate(8vw, 10vh) scale(1.15);
+            }
         }
 
         @keyframes float-blob-2 {
-            0% { transform: translate(0, 0) scale(1.1); }
-            100% { transform: translate(-10vw, -8vh) scale(0.85); }
+            0% {
+                transform: translate(0, 0) scale(1.1);
+            }
+
+            100% {
+                transform: translate(-10vw, -8vh) scale(0.85);
+            }
         }
 
         @keyframes float-blob-3 {
-            0% { transform: translate(0, 0) scale(0.9); }
-            100% { transform: translate(-6vw, 12vh) scale(1.1); }
+            0% {
+                transform: translate(0, 0) scale(0.9);
+            }
+
+            100% {
+                transform: translate(-6vw, 12vh) scale(1.1);
+            }
         }
 
         /* --- Glassmorphism Utility --- */
@@ -279,10 +303,21 @@
             transition: transform 0.5s ease;
         }
 
-        [data-theme="dark"] .sun-icon { display: block; }
-        [data-theme="dark"] .moon-icon { display: none; }
-        .sun-icon { display: none; }
-        .moon-icon { display: block; }
+        [data-theme="dark"] .sun-icon {
+            display: block;
+        }
+
+        [data-theme="dark"] .moon-icon {
+            display: none;
+        }
+
+        .sun-icon {
+            display: none;
+        }
+
+        .moon-icon {
+            display: block;
+        }
 
         /* CTA Buttons */
         .btn {
@@ -422,9 +457,20 @@
         }
 
         @keyframes pulse-dot {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
-            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+            0% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+            }
+
+            70% {
+                transform: scale(1);
+                box-shadow: 0 0 0 6px rgba(16, 185, 129, 0);
+            }
+
+            100% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+            }
         }
 
         .hero-title {
@@ -585,8 +631,15 @@
         }
 
         @keyframes bounce-slow {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
         }
 
         .about-details {
@@ -948,6 +1001,7 @@
         }
     </style>
 </head>
+
 <body>
 
     <!-- Dynamic Background Blobs -->
@@ -961,7 +1015,7 @@
     <header>
         <div class="nav-container">
             <a href="#" class="logo">Raj Shah Tutoring<span>.</span></a>
-            
+
             <ul class="nav-menu" id="nav-menu">
                 <li><a href="#about" class="nav-link">About</a></li>
                 <li><a href="#subjects" class="nav-link">Subjects</a></li>
@@ -971,7 +1025,8 @@
 
             <div class="nav-controls">
                 <!-- Theme Toggle -->
-                <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle light or dark theme" title="Toggle Theme">
+                <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle light or dark theme"
+                    title="Toggle Theme">
                     <!-- Sun Icon -->
                     <svg class="sun-icon" viewBox="0 0 24 24">
                         <circle cx="12" cy="12" r="5"></circle>
@@ -989,7 +1044,7 @@
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
                 </button>
-                
+
                 <!-- CTA Button -->
                 <a href="#contact" class="btn btn-primary btn-sm">Get Started</a>
 
@@ -1000,7 +1055,7 @@
     </header>
 
     <main>
-        
+
         <!-- Hero Section -->
         <section class="hero section-container" id="home">
             <div class="hero-grid">
@@ -1010,7 +1065,8 @@
                         Bay Area Local & Online Tutoring
                     </div>
                     <h1 class="hero-title">Building <span>Confidence</span> & Academic Success</h1>
-                    <p class="hero-desc">Personalized sessions tailored to your student's needs. Covering everything from elementary fundamentals to advanced High School and College courses.</p>
+                    <p class="hero-desc">Personalized sessions tailored to your student's needs. Covering everything
+                        from elementary fundamentals to advanced High School and College courses.</p>
                     <div class="hero-actions">
                         <a href="#contact" class="btn btn-primary">Start Learning</a>
                         <a href="#about" class="btn btn-secondary">Learn More</a>
@@ -1021,7 +1077,7 @@
                     <div class="glass-panel glass-stat-card">
                         <h3>Student Achievements</h3>
                         <div class="stat-item">
-                            <span class="stat-label">Avg. Grade Increase</span>
+                            <span class="stat-label">Average Grade Increase</span>
                             <span class="stat-value">+15%</span>
                         </div>
                         <div class="stat-item">
@@ -1051,12 +1107,12 @@
                     <!-- High-fidelity Custom Graphic Frame -->
                     <div class="about-graphic-container">
                         <img src="profile.jpg" alt="Raj Shah" class="about-image">
-                        
+
                         <div class="floating-badge fb-1">
                             <span>🎓</span> UC Santa Cruz CS Grad
                         </div>
                         <div class="floating-badge fb-2">
-                            <span>💡</span> 8+ Yrs Experience
+                            <span>💡</span> 6+ Yrs Experience
                         </div>
                     </div>
                 </div>
@@ -1067,9 +1123,16 @@
                         <h2 class="section-title">Hi, I'm Raj</h2>
                     </div>
                     <div class="about-text">
-                        <p>I graduated from UC Santa Cruz with a degree in Computer Science. My passion for teaching stems from my own 10th-grade physics teacher, who showed me that learning doesn't have to be intimidating—it can be incredibly empowering.</p>
-                        <p>Looking for dedicated support in math, physics, or other subjects? As an experienced local tutor to the Bay Area, I offer personalized online and in-person sessions tailored to your student's needs, covering everything from standard high school math to advanced AP courses.</p>
-                        <p>I have experience tutoring over 40 students in all grades from 3rd-12th as well as university students. My goal is to build genuine confidence and deep understanding through clear, structured guidance personalized for your student’s needs.</p>
+                        <p>I graduated from UC Santa Cruz with a degree in Computer Science. My passion for teaching
+                            stems from my own 10th-grade physics teacher, who showed me that learning doesn't have to be
+                            intimidating.</p>
+                        <p>Looking for dedicated support in math, physics, or other subjects? As an experienced local
+                            tutor to the Bay Area, I offer personalized online and in-person sessions tailored to your
+                            student's needs, covering everything from standard high school math to advanced AP courses.
+                        </p>
+                        <p>I have experience tutoring 40+ students in all grades from 3rd-12th as well as university
+                            students. My goal is to build genuine confidence and deep understanding through clear,
+                            structured guidance personalized for your student’s needs.</p>
                     </div>
                 </div>
             </div>
@@ -1080,7 +1143,8 @@
             <div class="section-header">
                 <span class="section-tag">Expertise</span>
                 <h2 class="section-title">Subjects & Specialties</h2>
-                <p class="section-subtitle">Dedicated instructional support customized for the student's curriculum and pace.</p>
+                <p class="section-subtitle">Dedicated instructional support customized for the student's curriculum and
+                    pace.</p>
             </div>
 
             <div class="subjects-grid">
@@ -1089,11 +1153,14 @@
                     <div class="subject-icon-box">
                         <!-- Math Icon (Integral/Sigma) -->
                         <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z">
+                            </path>
                         </svg>
                     </div>
                     <h3>Mathematics</h3>
-                    <p>Algebra I & II, Geometry, Trigonometry, Pre-Calculus, AP Calculus AB/BC, and college-level mathematics.</p>
+                    <p>Algebra I & II, Geometry, Trigonometry, Pre-Calculus, AP Calculus AB/BC, and college-level
+                        mathematics.</p>
                 </div>
 
                 <!-- Card 2: Physics -->
@@ -1101,11 +1168,14 @@
                     <div class="subject-icon-box">
                         <!-- Physics Icon (Atom) -->
                         <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-12.728l.707.707m11.314 11.314l.707-.707M12 12a5 5 0 100-10 5 5 0 000 10z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-12.728l.707.707m11.314 11.314l.707-.707M12 12a5 5 0 100-10 5 5 0 000 10z">
+                            </path>
                         </svg>
                     </div>
                     <h3>Physics</h3>
-                    <p>High school Physics, AP Physics (1, 2, C), and university mechanics. Bridging mathematical formulas with physical intuition.</p>
+                    <p>High school Physics, AP Physics (1, 2, C), and university mechanics. Bridging mathematical
+                        formulas with physical intuition.</p>
                 </div>
 
                 <!-- Card 3: Economics -->
@@ -1113,11 +1183,13 @@
                     <div class="subject-icon-box">
                         <!-- Economics Icon (Trending Up / Graph) -->
                         <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6">
+                            </path>
                         </svg>
                     </div>
                     <h3>Economics</h3>
-                    <p>AP Microeconomics, AP Macroeconomics, and foundational university economics courses. Graphic analysis and logic checks.</p>
+                    <p>AP Microeconomics, AP Macroeconomics, and foundational university economics courses. Graphic
+                        analysis and logic checks.</p>
                 </div>
 
                 <!-- Card 4: All Grades -->
@@ -1125,11 +1197,14 @@
                     <div class="subject-icon-box">
                         <!-- Education Icon (Cap/Book) -->
                         <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253">
+                            </path>
                         </svg>
                     </div>
                     <h3>All Subjects (3-12)</h3>
-                    <p>Supporting all levels, from 3rd grade fundamentals up to college level, adjusting the style of coaching to match the student's unique age group.</p>
+                    <p>Supporting all levels, from 3rd grade fundamentals up to college level, adjusting the style of
+                        coaching to match the student's unique age group.</p>
                 </div>
             </div>
         </section>
@@ -1139,7 +1214,8 @@
             <div class="section-header">
                 <span class="section-tag">Success Stories</span>
                 <h2 class="section-title">What Students Say</h2>
-                <p class="section-subtitle">Real feedback from local Bay Area students who reached their academic goals.</p>
+                <p class="section-subtitle">Real feedback from local Bay Area students who reached their academic goals.
+                </p>
             </div>
 
             <div class="testimonials-grid">
@@ -1147,9 +1223,11 @@
                 <div class="glass-panel testimonial-card">
                     <!-- Quote Icon -->
                     <svg class="quote-icon" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                        <path
+                            d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
                     </svg>
-                    <p class="testimonial-text">"I was struggling with Physics, but Raj made it click. I got an A on my final! He explains concepts logically rather than just memorizing formulas."</p>
+                    <p class="testimonial-text">"I was struggling with Physics, but Raj made it click. I got an A on my
+                        final! He explains concepts logically rather than just memorizing formulas."</p>
                     <div class="testimonial-author">
                         <div class="author-avatar">AD</div>
                         <div class="author-info">
@@ -1162,9 +1240,11 @@
                 <!-- Card 2 -->
                 <div class="glass-panel testimonial-card">
                     <svg class="quote-icon" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                        <path
+                            d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
                     </svg>
-                    <p class="testimonial-text">"The best coding and math tutor. Helped me ace AP CSA. His background in Computer Science at UCSC really shines through when helping with programming."</p>
+                    <p class="testimonial-text">"The best coding and math tutor. Helped me ace AP CSA. His background in
+                        Computer Science at UCSC really shines through when helping with programming."</p>
                     <div class="testimonial-author">
                         <div class="author-avatar">PS</div>
                         <div class="author-info">
@@ -1177,9 +1257,11 @@
                 <!-- Card 3 -->
                 <div class="glass-panel testimonial-card">
                     <svg class="quote-icon" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                        <path
+                            d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
                     </svg>
-                    <p class="testimonial-text">"Explained Calculus better than my actual teacher. Friendly, super responsive, and extremely structured in how he designs each session."</p>
+                    <p class="testimonial-text">"Explained Calculus better than my actual teacher. Friendly, super
+                        responsive, and extremely structured in how he designs each session."</p>
                     <div class="testimonial-author">
                         <div class="author-avatar">JM</div>
                         <div class="author-info">
@@ -1196,19 +1278,22 @@
             <div class="section-header">
                 <span class="section-tag">Let's Connect</span>
                 <h2 class="section-title">Schedule a Session</h2>
-                <p class="section-subtitle">Get in touch to check rates, availability, or ask any questions about personalized plans.</p>
+                <p class="section-subtitle">Get in touch to check rates, availability, or ask any questions about
+                    personalized plans.</p>
             </div>
 
             <div class="contact-grid">
                 <div class="contact-info-block">
                     <h3>Reach Out Directly</h3>
-                    
+
                     <div class="contact-channels">
                         <!-- Email -->
                         <a href="mailto:rajshahtutoring@gmail.com" class="glass-panel contact-card">
                             <div class="contact-icon-box">
                                 <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                                    </path>
                                 </svg>
                             </div>
                             <div class="contact-details">
@@ -1221,7 +1306,9 @@
                         <a href="tel:+16509068690" class="glass-panel contact-card">
                             <div class="contact-icon-box">
                                 <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z">
+                                    </path>
                                 </svg>
                             </div>
                             <div class="contact-details">
@@ -1234,11 +1321,16 @@
                     <!-- Google Forms CTA Panel -->
                     <div class="google-form-panel">
                         <h3>Prefer the Google Form?</h3>
-                        <p>Fill out the official interest form to share details about your student, subject goals, and schedule preferences.</p>
-                        <a href="https://forms.gle/HcfX4nJzuUAaDV2o6" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-                            Open Interest Form 
-                            <svg style="width:16px;height:16px;margin-left:8px;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 00-2 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                        <p>Fill out the official interest form to share details about your student, subject goals, and
+                            schedule preferences.</p>
+                        <a href="https://forms.gle/HcfX4nJzuUAaDV2o6" target="_blank" rel="noopener noreferrer"
+                            class="btn btn-primary">
+                            Open Interest Form
+                            <svg style="width:16px;height:16px;margin-left:8px;" fill="none" stroke="currentColor"
+                                stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 00-2 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14">
+                                </path>
                             </svg>
                         </a>
                     </div>
@@ -1246,33 +1338,39 @@
 
                 <!-- Instant Message Form -->
                 <div class="glass-panel contact-form-container">
-                    <form class="contact-form" action="https://formspree.io/f/your-form-id" method="POST" id="inquiry-form">
+                    <form class="contact-form" action="https://formspree.io/f/your-form-id" method="POST"
+                        id="inquiry-form">
                         <h3>Send an Inquiry</h3>
-                        
+
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="form-name" class="form-label">Full Name</label>
-                                <input type="text" id="form-name" name="name" class="form-control" autocomplete="name" required placeholder="Your Name">
+                                <input type="text" id="form-name" name="name" class="form-control" autocomplete="name"
+                                    required placeholder="Your Name">
                             </div>
                             <div class="form-group">
                                 <label for="form-phone" class="form-label">Phone Number</label>
-                                <input type="tel" id="form-phone" name="phone" class="form-control" autocomplete="tel" placeholder="(555) 123-4567">
+                                <input type="tel" id="form-phone" name="phone" class="form-control" autocomplete="tel"
+                                    placeholder="(555) 123-4567">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="form-email" class="form-label">Email Address</label>
-                            <input type="email" id="form-email" name="email" class="form-control" autocomplete="email" required placeholder="name@example.com">
+                            <input type="email" id="form-email" name="email" class="form-control" autocomplete="email"
+                                required placeholder="name@example.com">
                         </div>
 
                         <div class="form-group">
                             <label for="form-subject" class="form-label">Subject of Interest</label>
-                            <input type="text" id="form-subject" name="subject" class="form-control" required placeholder="e.g. AP Physics, Geometry">
+                            <input type="text" id="form-subject" name="subject" class="form-control" required
+                                placeholder="e.g. AP Physics, Geometry">
                         </div>
 
                         <div class="form-group">
                             <label for="form-message" class="form-label">Message / Details</label>
-                            <textarea id="form-message" name="message" class="form-control" placeholder="Share details about your student's needs, schedule, or questions."></textarea>
+                            <textarea id="form-message" name="message" class="form-control"
+                                placeholder="Share details about your student's needs, schedule, or questions."></textarea>
                         </div>
 
                         <button type="submit" class="btn btn-primary" style="border-radius: 10px;">Send Message</button>
@@ -1297,7 +1395,7 @@
         // Toggle mobile navigation menu
         const menuToggle = document.getElementById('menu-toggle');
         const navMenu = document.getElementById('nav-menu');
-        
+
         menuToggle.addEventListener('click', () => {
             navMenu.classList.toggle('active');
             menuToggle.textContent = navMenu.classList.contains('active') ? '✕' : '☰';
@@ -1352,4 +1450,5 @@
         });
     </script>
 </body>
+
 </html>
