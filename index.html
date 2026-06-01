@@ -15,6 +15,9 @@
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap"
         rel="stylesheet">
 
+    <!-- Calendly Widget CSS -->
+    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+
     <style>
         /* --- Core Design System --- */
         :root {
@@ -999,6 +1002,49 @@
             outline: 2px solid var(--accent);
             outline-offset: 4px;
         }
+
+        /* --- Floating Calendly Button --- */
+        #calendly-float-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 999;
+            padding: 0.85rem 1.5rem;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 1rem;
+            color: white;
+            background-color: var(--accent);
+            border: 1px solid var(--card-border);
+            border-radius: 50px;
+            box-shadow: 0 10px 25px var(--shadow-color), 0 0 15px var(--accent-glow);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        #calendly-float-btn:hover {
+            transform: translateY(-4px) scale(1.03);
+            background-color: var(--accent-hover);
+            box-shadow: 0 15px 30px var(--shadow-color), 0 0 20px var(--accent-glow);
+        }
+
+        #calendly-float-btn svg {
+            width: 20px;
+            height: 20px;
+            stroke: currentColor;
+        }
+
+        @media (max-width: 768px) {
+            #calendly-float-btn {
+                bottom: 1.5rem;
+                right: 1.5rem;
+                padding: 0.75rem 1.25rem;
+                font-size: 0.9rem;
+            }
+        }
     </style>
 </head>
 
@@ -1447,7 +1493,29 @@
         inquiryForm.addEventListener('submit', () => {
             console.log('Inquiry form submitted by user.');
         });
+
+        // Calendly Popup trigger
+        function openCalendly() {
+            Calendly.initPopupWidget({
+                url: 'https://calendly.com/rajshahtutoring/20min'
+            });
+            return false;
+        }
     </script>
+
+    <!-- Floating Calendly Trigger Button -->
+    <button id="calendly-float-btn" class="glass-panel" onclick="openCalendly()" aria-label="Book a Tutoring Session">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+        </svg>
+        Book a Session
+    </button>
+
+    <!-- Calendly Widget JS -->
+    <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
 </body>
 
 </html>
