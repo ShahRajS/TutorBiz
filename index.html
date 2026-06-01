@@ -3,492 +3,1348 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Peak Performance Tutoring</title>
+    <meta name="description" content="Bay Area local tutoring by Raj Shah. Personalized online and in-person tutoring in Mathematics, Physics, Economics, and more for grades 3rd-12th and university.">
+    <title>TutorBiz | Raj Shah Tutoring</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">
+
     <style>
-        /* --- General Settings --- */
+        /* --- Core Design System --- */
         :root {
-            --main-bg: #c1f4eb;       /* Light Teal */
-            --highlight: #2ed19c;     /* Greenish Teal */
-            --text-color: black;
-            --white: #ffffff;
+            /* Theme Independent Tokens */
+            --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+            --font-heading: 'Outfit', system-ui, -apple-system, sans-serif;
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            
+            /* Light Theme Tokens */
+            --accent: #059669; /* Emerald Green */
+            --accent-glow: rgba(5, 150, 105, 0.15);
+            --accent-hover: #047857;
+            --bg-gradient-1: #f8fafc;
+            --bg-gradient-2: #f1f5f9;
+            --card-bg: rgba(255, 255, 255, 0.7);
+            --card-border: rgba(255, 255, 255, 0.6);
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --nav-bg: rgba(255, 255, 255, 0.75);
+            --nav-border: rgba(255, 255, 255, 0.4);
+            --shadow-color: rgba(15, 23, 42, 0.06);
+            --input-bg: rgba(255, 255, 255, 0.9);
+            --input-border: #cbd5e1;
+            --blob-1: rgba(16, 185, 129, 0.08);
+            --blob-2: rgba(56, 189, 248, 0.08);
+            --glass-blur: 16px;
         }
 
+        [data-theme="dark"] {
+            /* Dark Theme Tokens */
+            --accent: #34d399; /* Mintier Green for dark background */
+            --accent-glow: rgba(52, 211, 153, 0.15);
+            --accent-hover: #6ee7b7;
+            --bg-gradient-1: #0b0f19;
+            --bg-gradient-2: #020617;
+            --card-bg: rgba(15, 23, 42, 0.55);
+            --card-border: rgba(255, 255, 255, 0.06);
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --nav-bg: rgba(11, 15, 25, 0.7);
+            --nav-border: rgba(255, 255, 255, 0.04);
+            --shadow-color: rgba(0, 0, 0, 0.3);
+            --input-bg: rgba(15, 23, 42, 0.7);
+            --input-border: #334155;
+            --blob-1: rgba(16, 185, 129, 0.12);
+            --blob-2: rgba(56, 189, 248, 0.12);
+        }
+
+        /* --- Reset & Base --- */
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
 
-        body {
-            /* The body background is handled by the fixed layer now */
-            color: var(--text-color);
-            font-family: Cambria, Georgia, serif;
-            line-height: 1.6;
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
         }
 
-        a { text-decoration: none; color: black; transition: 0.3s; }
-        ul { list-style: none; }
+        body {
+            background-color: var(--bg-gradient-1);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            transition: background-color 0.5s ease, color 0.3s ease;
+            overflow-x: hidden;
+        }
 
-        /* --- 1. FIXED BACKGROUND LAYER --- */
-        /* This container stays put while everything else scrolls */
-        .fixed-background-layer {
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition-smooth);
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-heading);
+            color: var(--text-primary);
+            font-weight: 700;
+        }
+
+        /* --- Background Animation Blobs --- */
+        .background-blobs {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            z-index: -1; /* Sends it to the very back */
-            background-color: var(--white); /* Left side base */
+            z-index: -2;
             overflow: hidden;
+            pointer-events: none;
         }
 
-        /* The Right Side Color Wave (Fixed) */
-        .hero-wave-bg {
+        .blob {
             position: absolute;
-            top: 0;
-            right: 0;
-            width: 65%;
-            height: 100%;
-            background-color: var(--main-bg);
-            /* Creating the curve */
-            clip-path: ellipse(90% 100% at 80% 50%);
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.8;
+            transition: background-color 0.5s ease;
         }
 
-        /* Floating Geometric Figures (Fixed) */
-        .shape {
-            position: absolute;
-            opacity: 0.6;
-            animation: float 6s ease-in-out infinite;
+        .blob-1 {
+            top: -10%;
+            left: -10%;
+            width: 45vw;
+            height: 45vw;
+            background-color: var(--blob-1);
+            animation: float-blob-1 25s infinite alternate ease-in-out;
         }
 
-        /* Triangles */
-        .shape-triangle {
-            width: 0; 
-            height: 0; 
-            border-left: 15px solid transparent;
-            border-right: 15px solid transparent;
-            border-bottom: 25px solid var(--highlight);
+        .blob-2 {
+            bottom: -10%;
+            right: -10%;
+            width: 50vw;
+            height: 50vw;
+            background-color: var(--blob-2);
+            animation: float-blob-2 30s infinite alternate ease-in-out;
         }
 
-        /* Squares */
-        .shape-square {
-            width: 25px;
-            height: 25px;
-            background-color: var(--highlight);
-            transform: rotate(45deg);
+        .blob-3 {
+            top: 40%;
+            left: 50%;
+            width: 35vw;
+            height: 35vw;
+            background-color: var(--blob-1);
+            animation: float-blob-3 20s infinite alternate ease-in-out;
         }
 
-        /* Positioning shapes in the fixed layer */
-        .s1 { top: 20%; left: 10%; animation-delay: 0s; }
-        .s2 { top: 60%; left: 45%; border-bottom-color: black; animation-delay: 1s; }
-        .s3 { top: 15%; right: 20%; background-color: white; animation-delay: 2s; }
-        .s4 { bottom: 20%; right: 10%; width: 40px; height: 40px; border: 3px solid white; background: transparent; animation-delay: 3s; }
-
-        @keyframes float {
-            0% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(10deg); }
-            100% { transform: translateY(0px) rotate(0deg); }
+        @keyframes float-blob-1 {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(8vw, 10vh) scale(1.15); }
         }
 
-        /* --- 2. FIXED HEADER --- */
+        @keyframes float-blob-2 {
+            0% { transform: translate(0, 0) scale(1.1); }
+            100% { transform: translate(-10vw, -8vh) scale(0.85); }
+        }
+
+        @keyframes float-blob-3 {
+            0% { transform: translate(0, 0) scale(0.9); }
+            100% { transform: translate(-6vw, 12vh) scale(1.1); }
+        }
+
+        /* --- Glassmorphism Utility --- */
+        .glass-panel {
+            background: var(--card-bg);
+            backdrop-filter: blur(var(--glass-blur)) saturate(180%);
+            -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(180%);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px var(--shadow-color);
+            transition: var(--transition-smooth);
+        }
+
+        .glass-panel:hover {
+            box-shadow: 0 15px 35px var(--shadow-color), 0 0 15px var(--accent-glow);
+            transform: translateY(-4px);
+        }
+
+        /* --- Header & Navigation --- */
         header {
-            position: fixed; /* Fixes header to top */
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            padding: 1rem 5%;
-            z-index: 1000; /* Ensures it stays on top of everything */
+            z-index: 1000;
+            background: var(--nav-bg);
+            backdrop-filter: blur(12px) saturate(180%);
+            -webkit-backdrop-filter: blur(12px) saturate(180%);
+            border-bottom: 1px solid var(--nav-border);
+            transition: var(--transition-smooth);
+        }
+
+        .nav-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 1.25rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            
-            /* Glassmorphism effect so you can read it over scrolling content */
-            background: rgba(255, 255, 255, 0.85); 
-            backdrop-filter: blur(10px);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
 
         .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: black;
-        }
-
-        .nav-links {
+            font-family: var(--font-heading);
+            font-size: 1.6rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
             display: flex;
-            gap: 30px;
+            align-items: center;
+            gap: 4px;
         }
 
-        .nav-links a {
-            font-weight: bold;
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-link:hover {
+            color: var(--accent);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: var(--transition-smooth);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Controls Block (Theme toggle + CTA) */
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        /* Theme Toggle Button */
+        .theme-toggle-btn {
+            background: none;
+            border: 1px solid var(--card-border);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-primary);
+            transition: var(--transition-smooth);
+            background: var(--card-bg);
+        }
+
+        .theme-toggle-btn:hover {
+            color: var(--accent);
+            border-color: var(--accent);
+            transform: scale(1.05);
+        }
+
+        .theme-toggle-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            transition: transform 0.5s ease;
+        }
+
+        [data-theme="dark"] .sun-icon { display: block; }
+        [data-theme="dark"] .moon-icon { display: none; }
+        .sun-icon { display: none; }
+        .moon-icon { display: block; }
+
+        /* CTA Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: var(--transition-smooth);
+            cursor: pointer;
+            padding: 0.75rem 1.75rem;
+            font-size: 1rem;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: white;
+            box-shadow: 0 4px 14px var(--accent-glow);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px var(--accent-glow);
+        }
+
+        .btn-secondary {
+            background-color: var(--card-bg);
+            color: var(--text-primary);
+            border: 1px solid var(--card-border);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--accent-glow);
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .btn-sm {
+            padding: 0.5rem 1.25rem;
+            font-size: 0.875rem;
+        }
+
+        .menu-toggle-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            cursor: pointer;
+        }
+
+        /* --- Main Content Section Wrapper --- */
+        main {
+            padding-top: 80px;
+        }
+
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 6rem 2rem;
+        }
+
+        /* Section Headings */
+        .section-header {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 4rem auto;
+        }
+
+        .section-tag {
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+        }
+
+        .section-subtitle {
+            color: var(--text-secondary);
             font-size: 1.1rem;
         }
 
-        .nav-links a:hover {
-            color: var(--highlight);
-        }
-
-        .menu-toggle { display: none; font-size: 1.5rem; cursor: pointer; }
-
-        /* --- 3. SCROLLABLE CONTENT --- */
-        main {
+        /* --- Hero Section --- */
+        .hero {
             position: relative;
-            z-index: 10;
-            /* Padding top creates space so the fixed header doesn't cover content */
-            padding-top: 100px; 
-        }
-
-        /* Hero Content (Scrolls over the fixed background) */
-        .hero-container {
+            min-height: 85vh;
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            min-height: 80vh; /* Takes up most of the screen initially */
-            padding: 0 5%;
-            max-width: 1400px;
-            margin: 0 auto;
         }
 
-        .hero-text {
-            width: 45%;
-        }
-
-        .hero-text h1 {
-            font-size: 3.5rem;
-            line-height: 1.2;
-            margin-bottom: 1.5rem;
-        }
-
-        .hero-text p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-        }
-
-        /* Call to Action Button */
-        .cta-button {
-            display: inline-block;
-            background-color: var(--highlight);
-            color: black;
-            padding: 12px 35px;
-            border-radius: 50px;
-            font-weight: bold;
-            font-size: 1.2rem;
-            border: none;
-            box-shadow: 0 4px 15px rgba(46, 209, 156, 0.4);
-            cursor: pointer;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(46, 209, 156, 0.6);
-        }
-
-        /* Floating Card Graphic */
-        .hero-graphic {
-            width: 40%;
-            display: flex;
-            justify-content: flex-end;
-        }
-
-        .floating-card {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            width: 100%;
-            max-width: 350px;
-            border-left: 5px solid var(--highlight);
-        }
-        
-        .floating-card h3 { font-size: 1.5rem; margin-bottom: 10px; }
-        .floating-card .stat-row { display: flex; justify-content: space-between; margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 5px;}
-
-        /* --- Content Sections --- */
-        section {
-            padding: 5rem 5%;
-            /* Make sections distinct as they scroll over the fixed BG */
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        h2 {
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            position: relative;
-            display: inline-block;
-        }
-        
-        h2::after {
-            content: '';
-            display: block;
-            width: 50%;
-            height: 4px;
-            background: var(--highlight);
-            margin-top: 5px;
-        }
-
-        /* Grid Layout for Cards */
-        .grid-container {
+        .hero-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 4rem;
+            align-items: center;
+            width: 100%;
+        }
+
+        .hero-text-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .hero-badge {
+            background-color: var(--accent-glow);
+            color: var(--accent);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            align-self: flex-start;
+        }
+
+        .hero-badge-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: pulse-dot 2s infinite;
+        }
+
+        @keyframes pulse-dot {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+
+        .hero-title {
+            font-size: 3.8rem;
+            line-height: 1.1;
+            letter-spacing: -2px;
+        }
+
+        .hero-title span {
+            color: var(--accent);
+            background: linear-gradient(135deg, var(--accent) 0%, #10b981 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-desc {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 550px;
+            line-height: 1.6;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        /* Hero Graphic Stats Card */
+        .hero-graphic-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .glass-stat-card {
+            width: 100%;
+            max-width: 400px;
+            padding: 2.5rem;
+            border-radius: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .glass-stat-card h3 {
+            font-size: 1.35rem;
+            border-bottom: 1px solid var(--card-border);
+            padding-bottom: 1rem;
+        }
+
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .stat-value {
+            font-family: var(--font-heading);
+            font-weight: 800;
+            color: var(--accent);
+            font-size: 1.4rem;
+        }
+
+        .progress-visual {
+            margin-top: 1rem;
+            height: 60px;
+            background: rgba(16, 185, 129, 0.05);
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            padding: 8px 15px;
+            border-radius: 12px;
+            border: 1px solid var(--card-border);
+        }
+
+        .progress-bar {
+            width: 16%;
+            border-radius: 4px;
+            background: var(--accent);
+            opacity: 0.85;
+            transition: height 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+            height: 0%;
+        }
+
+        /* --- About Section --- */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 0.9fr 1.1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-image-wrapper {
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+
+        .about-graphic-container {
+            width: 320px;
+            height: 320px;
+            border-radius: 30px;
+            background: linear-gradient(135deg, var(--accent-glow) 0%, rgba(56, 189, 248, 0.1) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            border: 2px dashed var(--accent);
+        }
+
+        .about-icon {
+            width: 120px;
+            height: 120px;
+            color: var(--accent);
+        }
+
+        .floating-badge {
+            position: absolute;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            padding: 0.75rem 1.25rem;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 10px 25px var(--shadow-color);
+            z-index: 2;
+        }
+
+        .fb-1 {
+            top: 15%;
+            left: -10%;
+            animation: bounce-slow 4s infinite ease-in-out;
+        }
+
+        .fb-2 {
+            bottom: 15%;
+            right: -10%;
+            animation: bounce-slow 4.5s infinite ease-in-out;
+        }
+
+        @keyframes bounce-slow {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .about-details {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .about-text p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 1.25rem;
+        }
+
+        /* --- Subjects Section --- */
+        .subjects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 2rem;
         }
 
-        .card {
-            background: white;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            transition: 0.3s;
-            border-top: 4px solid var(--highlight);
+        .subject-card {
+            padding: 2.5rem 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            height: 100%;
         }
 
-        .card:hover { transform: translateY(-5px); }
-        .card h3 { margin-bottom: 1rem; color: var(--highlight); font-size: 1.5rem; }
-
-        /* Form Styling */
-        form {
-            background: white;
-            padding: 3rem;
-            border-radius: 15px;
-            max-width: 700px;
-            margin: 0 auto;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        .subject-icon-box {
+            width: 54px;
+            height: 54px;
+            border-radius: 14px;
+            background: var(--accent-glow);
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(16, 185, 129, 0.1);
         }
 
-        .form-group { margin-bottom: 1.5rem; }
-        label { display: block; margin-bottom: 0.5rem; font-weight: bold; }
-        input, textarea, select {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            font-family: Cambria;
-            background: #f9f9f9;
+        .subject-icon-box svg {
+            width: 28px;
+            height: 28px;
         }
-        
-        button[type="submit"] {
-            width: 100%;
-            background-color: var(--highlight);
-            color: black;
-            border: none;
-            padding: 15px;
-            font-size: 1.2rem;
-            border-radius: 6px;
-            cursor: pointer;
-            font-family: Cambria;
-            font-weight: bold;
-        }
-        
-        button[type="submit"]:hover { background-color: black; color: white; }
 
-        footer {
-            background-color: var(--highlight);
-            text-align: center;
-            padding: 2rem;
+        .subject-card h3 {
+            font-size: 1.4rem;
+        }
+
+        .subject-card p {
+            color: var(--text-secondary);
+            font-size: 0.975rem;
+            line-height: 1.5;
+        }
+
+        /* --- Testimonials Section --- */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
             position: relative;
-            z-index: 10;
         }
 
-        /* Mobile Styles */
-        @media (max-width: 900px) {
-            .hero-wave-bg {
-                width: 100%;
-                height: 50%;
-                top: auto;
-                bottom: 0;
-                clip-path: ellipse(150% 100% at 50% 100%);
+        .quote-icon {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            color: var(--accent);
+            opacity: 0.15;
+            width: 40px;
+            height: 40px;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            color: var(--text-primary);
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: auto;
+            border-top: 1px solid var(--card-border);
+            padding-top: 1.25rem;
+        }
+
+        .author-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent) 0%, rgba(56, 189, 248, 0.6) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .author-info h4 {
+            font-size: 1rem;
+        }
+
+        .author-info span {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        /* --- Contact & Booking Section --- */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 0.95fr 1.05fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .contact-info-block {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .contact-channels {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .contact-card {
+            padding: 1.5rem 1.75rem;
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            text-decoration: none;
+        }
+
+        .contact-card:hover {
+            border-color: var(--accent);
+        }
+
+        .contact-icon-box {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            background: var(--accent-glow);
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .contact-icon-box svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .contact-details h4 {
+            font-size: 1.05rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .contact-details p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Google Forms CTA Panel */
+        .google-form-panel {
+            padding: 2rem;
+            border-radius: 16px;
+            background: rgba(16, 185, 129, 0.04);
+            border: 1px dashed var(--accent);
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            align-items: flex-start;
+        }
+
+        .google-form-panel h3 {
+            font-size: 1.25rem;
+        }
+
+        .google-form-panel p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Form Controls */
+        .contact-form-container {
+            padding: 3rem;
+            border-radius: 24px;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.25rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .form-control {
+            font-family: var(--font-body);
+            background: var(--input-bg);
+            border: 1px solid var(--input-border);
+            border-radius: 10px;
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+            color: var(--text-primary);
+            outline: none;
+            transition: var(--transition-smooth);
+            min-height: 48px;
+        }
+
+        @media (pointer: coarse) {
+            .form-control {
+                min-height: 52px;
             }
-            .hero-container {
-                flex-direction: column;
-                justify-content: center;
+        }
+
+        .form-control:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-glow);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* --- Footer --- */
+        footer {
+            border-top: 1px solid var(--nav-border);
+            background: var(--nav-bg);
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .footer-text {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* --- Responsive Styles --- */
+        @media (max-width: 992px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
                 text-align: center;
-                padding-top: 2rem;
             }
-            .hero-text {
-                width: 100%;
-                margin-bottom: 3rem;
+
+            .hero-badge {
+                align-self: center;
             }
-            .hero-graphic {
-                width: 100%;
+
+            .hero-desc {
+                margin: 0 auto;
+            }
+
+            .hero-actions {
                 justify-content: center;
             }
-            .nav-links { display: none; }
-            .menu-toggle { display: block; }
-            h2::after { margin: 5px auto; }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+                text-align: center;
+            }
+
+            .about-image-wrapper {
+                order: -1;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--nav-bg);
+                backdrop-filter: blur(16px);
+                flex-direction: column;
+                padding: 1.5rem 0;
+                gap: 1.5rem;
+                border-bottom: 1px solid var(--nav-border);
+                box-shadow: 0 10px 15px var(--shadow-color);
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .menu-toggle-btn {
+                display: block;
+            }
+
+            .hero-title {
+                font-size: 2.8rem;
+            }
+
+            .contact-form-container {
+                padding: 2rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Focus Ring Helper for Accessibility */
+        *:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 4px;
         }
     </style>
 </head>
 <body>
 
-    <div class="fixed-background-layer">
-        <div class="hero-wave-bg"></div>
-        
-        <div class="shape shape-triangle s1"></div>
-        <div class="shape shape-triangle s2"></div>
-        <div class="shape shape-square s3"></div>
-        <div class="shape shape-square s4"></div>
+    <!-- Dynamic Background Blobs -->
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
     </div>
 
+    <!-- Navigation Header -->
     <header>
-        <div class="logo">Peak Tutors</div>
-        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-        <ul class="nav-links">
-            <li><a href="#about">About Me</a></li>
-            <li><a href="#classes">Classes</a></li>
-            <li><a href="#reviews">Reviews</a></li>
-            <li><a href="#calendar">Calendar</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li><a href="#interest" class="cta-button" style="padding: 8px 20px; font-size: 1rem; box-shadow: none;">Get Started</a></li>
-        </ul>
+        <div class="nav-container">
+            <a href="#" class="logo">TutorBiz<span>.</span></a>
+            
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#subjects" class="nav-link">Subjects</a></li>
+                <li><a href="#testimonials" class="nav-link">Reviews</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+
+            <div class="nav-controls">
+                <!-- Theme Toggle -->
+                <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle light or dark theme" title="Toggle Theme">
+                    <!-- Sun Icon -->
+                    <svg class="sun-icon" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <!-- Moon Icon -->
+                    <svg class="moon-icon" viewBox="0 0 24 24">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+                
+                <!-- CTA Button -->
+                <a href="#contact" class="btn btn-primary btn-sm">Get Started</a>
+
+                <!-- Mobile Menu Button -->
+                <button class="menu-toggle-btn" id="menu-toggle" aria-label="Open navigation menu">☰</button>
+            </div>
+        </div>
     </header>
 
     <main>
         
-        <div class="hero-container">
-            <div class="hero-text">
-                <h1>Creating Confidence & Success</h1>
-                <p>Personalized tutoring for high school students. We simplify the complex and help you reach your academic potential.</p>
-                <a href="#interest" class="cta-button">Get Started &gt;</a>
-            </div>
-
-            <div class="hero-graphic">
-                <div class="floating-card">
-                    <h3>Student Results</h3>
-                    <div class="stat-row">
-                        <span>Avg. Grade Increase</span>
-                        <strong>+15%</strong>
+        <!-- Hero Section -->
+        <section class="hero section-container" id="home">
+            <div class="hero-grid">
+                <div class="hero-text-content">
+                    <div class="hero-badge">
+                        <span class="hero-badge-dot"></span>
+                        Bay Area Local & Online Tutoring
                     </div>
-                    <div class="stat-row">
-                        <span>Top Colleges</span>
-                        <strong>Accepted</strong>
-                    </div>
-                    <div class="stat-row">
-                        <span>SAT Points</span>
-                        <strong>+150</strong>
-                    </div>
-                    <div style="margin-top: 15px; height: 50px; background: #e0f7f4; display: flex; align-items: flex-end; justify-content: space-around; padding-bottom: 5px; border-radius: 5px;">
-                        <div style="width: 15%; height: 40%; background: var(--highlight);"></div>
-                        <div style="width: 15%; height: 60%; background: var(--highlight);"></div>
-                        <div style="width: 15%; height: 80%; background: var(--highlight);"></div>
-                        <div style="width: 15%; height: 50%; background: var(--highlight);"></div>
+                    <h1 class="hero-title">Building <span>Confidence</span> & Academic Success</h1>
+                    <p class="hero-desc">Personalized sessions tailored to your student's needs. Covering everything from elementary fundamentals to advanced High School and College courses.</p>
+                    <div class="hero-actions">
+                        <a href="#contact" class="btn btn-primary">Start Learning</a>
+                        <a href="#about" class="btn btn-secondary">Learn More</a>
                     </div>
                 </div>
-            </div>
-        </div>
 
-        <section id="about">
-            <div class="container">
-                <h2>About Me</h2>
-                <div class="card">
-                    <p><strong>Hi! I am Raj.</strong> I graduated from UC Santa Cruz with a degree in Computer Science, and I have over 8 years of tutoring experience. My passion for teaching stems from my own 10th-grade physics teacher who showed me that learning doesn't have to be scary—it can be empowering.</p>
-                    <br>
-                    <p>I have taught over 100 students, helping them not just pass tests, but understand the material fundamentally.</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="classes">
-            <div class="container">
-                <h2>Classes Available</h2>
-                <div class="grid-container">
-                    <div class="card">
-                        <h3>Mathematics</h3>
-                        <p>Algebra I & II, Geometry, Pre-Calculus, AP Calculus AB/BC.</p>
-                    </div>
-                    <div class="card">
-                        <h3>Science</h3>
-                        <p>Physics, Chemistry, Biology, AP Computer Science.</p>
-                    </div>
-                    <div class="card">
-                        <h3>Test Prep</h3>
-                        <p>SAT & ACT strategy sessions focusing on time management.</p>
+                <div class="hero-graphic-container">
+                    <div class="glass-panel glass-stat-card">
+                        <h3>Student Achievements</h3>
+                        <div class="stat-item">
+                            <span class="stat-label">Avg. Grade Increase</span>
+                            <span class="stat-value">+15%</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Experience</span>
+                            <span class="stat-value">8+ Years</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Students Tutored</span>
+                            <span class="stat-value">40+</span>
+                        </div>
+                        <div class="progress-visual" id="progress-visual">
+                            <div class="progress-bar" style="height: 45%;"></div>
+                            <div class="progress-bar" style="height: 65%;"></div>
+                            <div class="progress-bar" style="height: 85%;"></div>
+                            <div class="progress-bar" style="height: 55%;"></div>
+                            <div class="progress-bar" style="height: 95%;"></div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="reviews">
-            <div class="container">
-                <h2>What Students Say</h2>
-                <div class="grid-container">
-                    <div class="card">
-                        <p style="font-style: italic;">"I was struggling with Physics, but Raj made it click. I got an A on my final!"</p>
-                        <p style="font-weight: bold; margin-top: 10px;">- Alex D.</p>
+        <!-- About Section -->
+        <section class="section-container" id="about">
+            <div class="about-grid">
+                <div class="about-image-wrapper">
+                    <!-- High-fidelity Custom Graphic Frame -->
+                    <div class="about-graphic-container">
+                        <!-- User SVG Icon as Headshot replacement -->
+                        <svg class="about-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.62 48.62 0 0112 20.9c2.785 0 5.5-.37 8.085-1.066.046-.221.082-.444.111-.668a59.38 59.38 0 00-.49-6.347m-15.44 0a48.39 48.39 0 002.247-2.733m-2.246 2.733V8.9c0-1.816 1.01-3.493 2.684-4.28a48.7 48.7 0 0110.632 0c1.673.787 2.683 2.464 2.683 4.281v1.247m-16 0a48.536 48.536 0 003.5-3.08m12.5 3.08a48.4 48.4 0 00-3.5-3.08m-11.25 10.15c3.558-.085 7.008-.555 10.25-1.378m0 0a48.094 48.094 0 003.497-1.907m0 0A59.39 59.39 0 0021 12m-2.25-3.08L12 13.75 5.25 8.92M12 13.75v6.5" />
+                        </svg>
+                        
+                        <div class="floating-badge fb-1">
+                            <span>🎓</span> UC Santa Cruz CS Grad
+                        </div>
+                        <div class="floating-badge fb-2">
+                            <span>💡</span> 8+ Yrs Experience
+                        </div>
                     </div>
-                    <div class="card">
-                        <p style="font-style: italic;">"The best coding tutor. Helped me ace AP CSA."</p>
-                        <p style="font-weight: bold; margin-top: 10px;">- Priya S.</p>
+                </div>
+
+                <div class="about-details">
+                    <div>
+                        <span class="section-tag">About Me</span>
+                        <h2 class="section-title">Hi, I'm Raj</h2>
                     </div>
-                    <div class="card">
-                        <p style="font-style: italic;">"Explained calculus better than my actual teacher."</p>
-                        <p style="font-weight: bold; margin-top: 10px;">- Jordan M.</p>
+                    <div class="about-text">
+                        <p>I graduated from UC Santa Cruz with a degree in Computer Science. My passion for teaching stems from my own 10th-grade physics teacher, who showed me that learning doesn't have to be intimidating—it can be incredibly empowering.</p>
+                        <p>Looking for dedicated support in math, physics, or other subjects? As an experienced local tutor to the Bay Area, I offer personalized online and in-person sessions tailored to your student's needs, covering everything from standard high school math to advanced AP courses.</p>
+                        <p>I have experience tutoring over 40 students in all grades from 3rd-12th as well as university students. My goal is to build genuine confidence and deep understanding through clear, structured guidance personalized for your student’s needs.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="calendar">
-            <div class="container" style="text-align: center;">
-                <h2 style="border-color: var(--main-bg);">Availability</h2>
-                <div style="border: 2px dashed var(--highlight); padding: 40px; background: rgba(255,255,255,0.9); border-radius: 10px;">
-                    <p>[ Embed Google Calendar or Calendly Link Here ]</p>
+        <!-- Subjects Section -->
+        <section class="section-container" id="subjects">
+            <div class="section-header">
+                <span class="section-tag">Expertise</span>
+                <h2 class="section-title">Subjects & Specialties</h2>
+                <p class="section-subtitle">Dedicated instructional support customized for the student's curriculum and pace.</p>
+            </div>
+
+            <div class="subjects-grid">
+                <!-- Card 1: Math -->
+                <div class="glass-panel subject-card">
+                    <div class="subject-icon-box">
+                        <!-- Math Icon (Integral/Sigma) -->
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                        </svg>
+                    </div>
+                    <h3>Mathematics</h3>
+                    <p>Algebra I & II, Geometry, Trigonometry, Pre-Calculus, AP Calculus AB/BC, and college-level mathematics.</p>
+                </div>
+
+                <!-- Card 2: Physics -->
+                <div class="glass-panel subject-card">
+                    <div class="subject-icon-box">
+                        <!-- Physics Icon (Atom) -->
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-12.728l.707.707m11.314 11.314l.707-.707M12 12a5 5 0 100-10 5 5 0 000 10z"></path>
+                        </svg>
+                    </div>
+                    <h3>Physics</h3>
+                    <p>High school Physics, AP Physics (1, 2, C), and university mechanics. Bridging mathematical formulas with physical intuition.</p>
+                </div>
+
+                <!-- Card 3: Economics -->
+                <div class="glass-panel subject-card">
+                    <div class="subject-icon-box">
+                        <!-- Economics Icon (Trending Up / Graph) -->
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                        </svg>
+                    </div>
+                    <h3>Economics</h3>
+                    <p>AP Microeconomics, AP Macroeconomics, and foundational university economics courses. Graphic analysis and logic checks.</p>
+                </div>
+
+                <!-- Card 4: All Grades -->
+                <div class="glass-panel subject-card">
+                    <div class="subject-icon-box">
+                        <!-- Education Icon (Cap/Book) -->
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                        </svg>
+                    </div>
+                    <h3>All Subjects (3-12)</h3>
+                    <p>Supporting all levels, from 3rd grade fundamentals up to college level, adjusting the style of coaching to match the student's unique age group.</p>
                 </div>
             </div>
         </section>
 
-        <section id="interest">
-            <div class="container">
-                <h2 style="color: black;">Interest Form</h2>
-                <form action="https://formspree.io/f/your-form-id" method="POST">
-                    <div class="form-group">
-                        <label>Student Name</label>
-                        <input type="text" name="name" required>
+        <!-- Testimonials Section -->
+        <section class="section-container" id="testimonials">
+            <div class="section-header">
+                <span class="section-tag">Success Stories</span>
+                <h2 class="section-title">What Students Say</h2>
+                <p class="section-subtitle">Real feedback from local Bay Area students who reached their academic goals.</p>
+            </div>
+
+            <div class="testimonials-grid">
+                <!-- Card 1 -->
+                <div class="glass-panel testimonial-card">
+                    <!-- Quote Icon -->
+                    <svg class="quote-icon" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                    </svg>
+                    <p class="testimonial-text">"I was struggling with Physics, but Raj made it click. I got an A on my final! He explains concepts logically rather than just memorizing formulas."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">AD</div>
+                        <div class="author-info">
+                            <h4>Alex D.</h4>
+                            <span>Physics Student</span>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label>Email</label>
-                        <input type="email" name="email" required>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="glass-panel testimonial-card">
+                    <svg class="quote-icon" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                    </svg>
+                    <p class="testimonial-text">"The best coding and math tutor. Helped me ace AP CSA. His background in Computer Science at UCSC really shines through when helping with programming."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">PS</div>
+                        <div class="author-info">
+                            <h4>Priya S.</h4>
+                            <span>AP CS & Math Student</span>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label>Subject</label>
-                        <input type="text" name="subject" placeholder="e.g. AP Physics" required>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="glass-panel testimonial-card">
+                    <svg class="quote-icon" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                    </svg>
+                    <p class="testimonial-text">"Explained Calculus better than my actual teacher. Friendly, super responsive, and extremely structured in how he designs each session."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">JM</div>
+                        <div class="author-info">
+                            <h4>Jordan M.</h4>
+                            <span>AP Calculus Student</span>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label>Message</label>
-                        <textarea name="message" rows="4"></textarea>
-                    </div>
-                    <button type="submit">Send Message</button>
-                </form>
+                </div>
             </div>
         </section>
 
-        <footer>
-            <p>&copy; 2025 Peak Tutors. San Jose, CA.</p>
-            <p style="font-size: 0.9rem; margin-top: 5px;">Contact: (555) 123-4567 | raj@peaktutors.com</p>
-        </footer>
+        <!-- Contact & Booking Section -->
+        <section class="section-container" id="contact">
+            <div class="section-header">
+                <span class="section-tag">Let's Connect</span>
+                <h2 class="section-title">Schedule a Session</h2>
+                <p class="section-subtitle">Get in touch to check rates, availability, or ask any questions about personalized plans.</p>
+            </div>
+
+            <div class="contact-grid">
+                <div class="contact-info-block">
+                    <h3>Reach Out Directly</h3>
+                    
+                    <div class="contact-channels">
+                        <!-- Email -->
+                        <a href="mailto:rajshahtutoring@gmail.com" class="glass-panel contact-card">
+                            <div class="contact-icon-box">
+                                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                </svg>
+                            </div>
+                            <div class="contact-details">
+                                <h4>Email Me</h4>
+                                <p>rajshahtutoring@gmail.com</p>
+                            </div>
+                        </a>
+
+                        <!-- Text/Call -->
+                        <a href="tel:+16509068690" class="glass-panel contact-card">
+                            <div class="contact-icon-box">
+                                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                                </svg>
+                            </div>
+                            <div class="contact-details">
+                                <h4>Call or Text</h4>
+                                <p>+1 (650) 906-8690</p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Google Forms CTA Panel -->
+                    <div class="google-form-panel">
+                        <h3>Prefer the Google Form?</h3>
+                        <p>Fill out the official interest form to share details about your student, subject goals, and schedule preferences.</p>
+                        <a href="https://forms.gle/HcfX4nJzuUAaDV2o6" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                            Open Interest Form 
+                            <svg style="width:16px;height:16px;margin-left:8px;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 00-2 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Instant Message Form -->
+                <div class="glass-panel contact-form-container">
+                    <form class="contact-form" action="https://formspree.io/f/your-form-id" method="POST" id="inquiry-form">
+                        <h3>Send an Inquiry</h3>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="form-name" class="form-label">Full Name</label>
+                                <input type="text" id="form-name" name="name" class="form-control" autocomplete="name" required placeholder="Your Name">
+                            </div>
+                            <div class="form-group">
+                                <label for="form-phone" class="form-label">Phone Number</label>
+                                <input type="tel" id="form-phone" name="phone" class="form-control" autocomplete="tel" placeholder="(555) 123-4567">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="form-email" class="form-label">Email Address</label>
+                            <input type="email" id="form-email" name="email" class="form-control" autocomplete="email" required placeholder="name@example.com">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="form-subject" class="form-label">Subject of Interest</label>
+                            <input type="text" id="form-subject" name="subject" class="form-control" required placeholder="e.g. AP Physics, Geometry">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="form-message" class="form-label">Message / Details</label>
+                            <textarea id="form-message" name="message" class="form-control" placeholder="Share details about your student's needs, schedule, or questions."></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" style="border-radius: 10px;">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
 
     </main>
 
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <a href="#" class="logo">TutorBiz<span>.</span></a>
+            <p class="footer-text">&copy; 2026 Raj Shah Tutoring. Bay Area, California.</p>
+            <p class="footer-text" style="font-size: 0.85rem;">Contact: (650) 906-8690 | rajshahtutoring@gmail.com</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
     <script>
-        function toggleMenu() {
-            const nav = document.querySelector('.nav-links');
-            if(nav.style.display === 'flex') {
-                nav.style.display = 'none';
-            } else {
-                nav.style.display = 'flex';
-                nav.style.flexDirection = 'column';
-                nav.style.position = 'absolute';
-                nav.style.top = '60px';
-                nav.style.right = '0';
-                nav.style.background = 'white';
-                nav.style.width = '100%';
-                nav.style.padding = '20px';
-                nav.style.boxShadow = '0 5px 10px rgba(0,0,0,0.1)';
-            }
-        }
+        // Toggle mobile navigation menu
+        const menuToggle = document.getElementById('menu-toggle');
+        const navMenu = document.getElementById('nav-menu');
+        
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            menuToggle.textContent = navMenu.classList.contains('active') ? '✕' : '☰';
+        });
+
+        // Close menu when links are clicked on mobile
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                menuToggle.textContent = '☰';
+            });
+        });
+
+        // Light/Dark Theme Switching Logic
+        const themeToggle = document.getElementById('theme-toggle');
+        const getPreferredTheme = () => {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) return savedTheme;
+            return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        };
+
+        const applyTheme = (theme) => {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+        };
+
+        // Initialize theme
+        applyTheme(getPreferredTheme());
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            applyTheme(newTheme);
+        });
+
+        // Micro-interaction: animate the stats bar heights on load
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                const bars = document.querySelectorAll('.progress-bar');
+                const heights = ['55%', '70%', '95%', '60%', '90%'];
+                bars.forEach((bar, index) => {
+                    bar.style.height = heights[index];
+                });
+            }, 300);
+        });
+
+        // Form submission tracking
+        const inquiryForm = document.getElementById('inquiry-form');
+        inquiryForm.addEventListener('submit', () => {
+            console.log('Inquiry form submitted by user.');
+        });
     </script>
 </body>
 </html>
