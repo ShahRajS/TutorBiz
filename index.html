@@ -1170,7 +1170,7 @@
                         <h3>Student Achievements</h3>
                         <div class="stat-item">
                             <span class="stat-label">Average Grade Increase</span>
-                            <span class="stat-value">2 Letter Grades</span>
+                            <span class="stat-value">1.5 GPA points</span>
                         </div>
                         <div class="stat-item">
                             <span class="stat-label">Experience</span>
@@ -1179,13 +1179,6 @@
                         <div class="stat-item">
                             <span class="stat-label">Students Tutored</span>
                             <span class="stat-value">40+</span>
-                        </div>
-                        <div class="progress-visual" id="progress-visual">
-                            <div class="progress-bar" style="height: 45%;"></div>
-                            <div class="progress-bar" style="height: 65%;"></div>
-                            <div class="progress-bar" style="height: 85%;"></div>
-                            <div class="progress-bar" style="height: 55%;"></div>
-                            <div class="progress-bar" style="height: 95%;"></div>
                         </div>
                     </div>
                 </div>
@@ -1509,16 +1502,6 @@
             applyTheme(newTheme);
         });
 
-        // Micro-interaction: animate the stats bar heights on load
-        window.addEventListener('DOMContentLoaded', () => {
-            setTimeout(() => {
-                const bars = document.querySelectorAll('.progress-bar');
-                const heights = ['55%', '70%', '95%', '60%', '90%'];
-                bars.forEach((bar, index) => {
-                    bar.style.height = heights[index];
-                });
-            }, 300);
-        });
 
         // Form submission tracking
         const inquiryForm = document.getElementById('inquiry-form');
