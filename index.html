@@ -214,7 +214,7 @@
         .nav-container {
             max-width: 1280px;
             margin: 0 auto;
-            padding: 1.25rem 2rem;
+            padding: 1.25rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -235,10 +235,16 @@
         }
 
         .logo-img {
-            height: 40px;
+            height: 52px;
             width: auto;
             display: block;
             transition: var(--transition-smooth);
+        }
+
+        @media (max-width: 768px) {
+            .logo-img {
+                height: 44px;
+            }
         }
 
         .logo:hover .logo-img {
